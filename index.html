@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>임동호 · 자기소개</title>
+<title>Waypoints | 임동호</title>
 <meta name="description" content="내비게이션 개발자에서 네트워크·보안 엔지니어로. 막히면 숨던 사람이 먼저 그리고 적고 묻게 된 이야기와 13주 기록.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -40,7 +40,12 @@ time,.num b{font-variant-numeric:tabular-nums}
 /* 1. 고정 헤더 */
 header.top{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;gap:24px;height:var(--head)}
-header.top b{margin-right:auto;font-size:16px;letter-spacing:-.01em}
+header.top .brand{margin-right:auto;display:inline-flex;align-items:center;gap:8px;padding:6px 0;
+  font-size:16px;font-weight:700;letter-spacing:-.005em;color:var(--text);text-decoration:none;white-space:nowrap}
+/* 경유지 점: 첫 화면 경로의 점과 같은 모양 */
+header.top .brand::before{content:"";width:8px;height:8px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);flex:none}
+header.top .brand:hover{color:var(--accent)}
+header.top .brand:hover::before{background:var(--accent)}
 header.top nav{display:flex;gap:22px}
 header.top nav a{text-decoration:none;color:var(--sub);font-size:15px;padding:6px 0}
 header.top nav a:hover{color:var(--text)}
@@ -241,11 +246,12 @@ a.ab:hover{background:var(--accent);color:var(--on-accent)}
  .doors a::after{content:"↓" / ""}
  .story .entry::before{left:3px}.story h3::before{left:-26px;top:5px}
  .timeline::after{left:3px}}
+@media (max-width:360px){header.top nav{gap:11px}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <b>임동호</b>
+  <a class="brand" href="#top">Waypoints</a>
   <nav aria-label="섹션 이동"><a href="#story">이야기</a><a href="#numbers">숫자</a><a href="#works">대표작</a><a href="#resume">이력서</a></nav>
 </div></header>
 
