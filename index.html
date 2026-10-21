@@ -170,11 +170,48 @@ footer b{color:var(--text)}
  --accent:#6f9ef0;--accent-strong:#a2c0f6;--accent-soft:#17243a;--accent-mid:#2f4c7d;--dash:#34404f;--on-accent:#0d1420}}
 body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
 .hero h1{font-weight:700;letter-spacing:-.03em}
-.doors{border-top:0;position:relative;padding-top:34px;gap:16px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.doors::before{content:"";position:absolute;left:5px;right:12%;top:9px;height:3px;border-radius:2px;background:var(--accent)}
+.doors{border-top:0;position:relative;padding-top:42px;gap:16px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+/* 첫 화면: 네 입구를 잇는 내비게이션 경로. 처음 열 때 한 번만 그려진다 */
+.doors::before{content:"";position:absolute;left:0;right:0;top:0;height:30px;background:var(--accent);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 30' preserveAspectRatio='none'%3E%3Cpath d='M9 15C92-3 176 33 259 15S426-3 509 15 676 33 759 15C800 6 828 10 850 15M834 7L852 15 834 23' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 30' preserveAspectRatio='none'%3E%3Cpath d='M9 15C92-3 176 33 259 15S426-3 509 15 676 33 759 15C800 6 828 10 850 15M834 7L852 15 834 23' fill='none' stroke='%23000' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
 .doors li{position:relative}
-.doors li::before{content:"";position:absolute;left:0;top:-30px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.doors li::before{content:"";position:absolute;left:0;top:-35px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
 .doors a::after{content:""}
+@media (prefers-reduced-motion: no-preference){
+  .doors::before{animation:route-draw 1.4s cubic-bezier(.3,.7,.2,1) .2s both}
+  .doors li::before{animation:route-stop .35s ease-out both}
+  .doors li:nth-child(2)::before{animation-delay:.5s}
+  .doors li:nth-child(3)::before{animation-delay:.85s}
+  .doors li:nth-child(4)::before{animation-delay:1.2s}
+}
+@keyframes route-draw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes route-stop{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* 헤더: 지금 보고 있는 섹션 */
+header.top nav a[aria-current]{color:var(--text);box-shadow:inset 0 -2px 0 var(--accent)}
+
+/* 이야기: 읽은 만큼 채워지는 경로선 */
+.timeline{position:relative}
+.timeline::after{content:"";position:absolute;left:172px;top:var(--t0,0);width:4px;height:var(--fill,0px);border-radius:2px;background:var(--accent);pointer-events:none}
+.story .entry h3::before{transition:background-color .3s}
+.story .entry.passed h3::before{background:var(--accent)}
+a.ab{text-decoration:none}
+a.ab:hover{background:var(--accent);color:var(--on-accent)}
+
+/* 숫자: 기록 달력과 점 */
+.cal{display:grid;grid-template-rows:repeat(5,13px);grid-auto-flow:column;grid-auto-columns:13px;gap:4px;margin-top:16px;width:max-content;max-width:100%}
+.cal i,.cal-key i{display:block;border-radius:3px;background:var(--track)}
+.cal .c-done,.cal-key .c-done{background:var(--accent)}
+.cal .c-part,.cal-key .c-part{background:var(--accent-mid)}
+.cal .c-open{background:transparent;box-shadow:inset 0 0 0 2px var(--accent)}
+.cal .c-future{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.cal .c-pre{visibility:hidden}
+.cal-key{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:10px;font-size:12px;color:var(--faint);line-height:1.4}
+.num .cal-key span{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:400;line-height:1.4}
+.cal-key i{width:10px;height:10px;border-radius:2px}
+.dots{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.dots i{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--accent-mid)}
+.dots i.on{background:var(--accent);box-shadow:none}
 .story .entry::before{left:172px;width:4px;border-radius:2px;background:var(--accent-mid)}
 .story h3::before{left:-34px;top:.38em;width:14px;height:14px;border:3px solid var(--accent);background:var(--bg)}
 .story h3 time{color:var(--text);font-weight:700}
@@ -184,7 +221,8 @@ body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
 .work.paper{background:var(--surface);border:0}
 @media (max-width:720px){.doors{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:0}.doors::before,.doors li::before{display:none}
  .doors a::after{content:"↓" / ""}
- .story .entry::before{left:3px}.story h3::before{left:-26px;top:5px}}
+ .story .entry::before{left:3px}.story h3::before{left:-26px;top:5px}
+ .timeline::after{left:3px}}
 </style>
 </head>
 <body>
@@ -222,15 +260,15 @@ body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
   </article>
   <article class="entry">
   <h3><time datetime="2021">2021–2023</time>혼자 고치지 않는 법</h3>
-  <p>2021년 4월, 나는 자동차 내비게이션을 만드는 회사에 들어갔다. 처음 보는 큰 코드 앞에서 첫 학기의 막막함이 다시 찾아왔다. 이번에는 모르는 것을 정리해서 물었고, 그렇게 익힌 화면 수정 순서를 가이드 문서로 남겼다. <span class="ab">대인관계력</span></p>
+  <p>2021년 4월, 나는 자동차 내비게이션을 만드는 회사에 들어갔다. 처음 보는 큰 코드 앞에서 첫 학기의 막막함이 다시 찾아왔다. 이번에는 모르는 것을 정리해서 물었고, 그렇게 익힌 화면 수정 순서를 가이드 문서로 남겼다. <a class="ab" href="#ab-relation">대인관계력</a></p>
   <p>2023년 봄에 들어온 신입은 그 가이드로 첫 단독 업무를 마쳤다. 내가 혼자 끌어안던 것을 이제는 꺼내어 남에게 건넬 수 있게 된 것이다. 그해 나는 대리가 되었다.</p>
-  <p>2024년 5월, 3년 2개월 다닌 회사를 나왔다. 화면 뒤의 서버와 데이터베이스가 궁금했다. 2025년 웹 개발 과정에서 서버를 직접 만들었고, 6월에 정보처리기사와 SQLD에 합격했다. 7월부터는 다섯 명이 함께한 오픈소스 개발자대회 '알리온'에서 즐겨찾기·메인 화면 알림·마이페이지를 맡아 9월에 제출했다. <span class="ab">자기동기력</span></p>
+  <p>2024년 5월, 3년 2개월 다닌 회사를 나왔다. 화면 뒤의 서버와 데이터베이스가 궁금했다. 2025년 웹 개발 과정에서 서버를 직접 만들었고, 6월에 정보처리기사와 SQLD에 합격했다. 7월부터는 다섯 명이 함께한 오픈소스 개발자대회 '알리온'에서 즐겨찾기·메인 화면 알림·마이페이지를 맡아 9월에 제출했다. <a class="ab" href="#ab-motivation">자기동기력</a></p>
   </article>
   <article class="entry">
   <h3><time datetime="2026-09-04">2026.09.04</time>먼저 묻는 사람</h3>
-  <p>지금 나는 K-뉴딜 SKT ALEPH 과정에서 네트워크와 보안을 배운다. 9월 첫 주에는 실습 환경 오류로 사흘 동안 수업을 따라가지 못했다. 예전 같으면 혼자 붙들었을 일이다. 9월 4일 아침 기록에 이렇게 적었다. "내가 먼저 나서지 않으면 아무 일도 일어나지 않는다." 그날부터 놓친 부분은 바로 물었다. <span class="ab">자기동기력</span></p>
+  <p>지금 나는 K-뉴딜 SKT ALEPH 과정에서 네트워크와 보안을 배운다. 9월 첫 주에는 실습 환경 오류로 사흘 동안 수업을 따라가지 못했다. 예전 같으면 혼자 붙들었을 일이다. 9월 4일 아침 기록에 이렇게 적었다. "내가 먼저 나서지 않으면 아무 일도 일어나지 않는다." 그날부터 놓친 부분은 바로 물었다. <a class="ab" href="#ab-motivation">자기동기력</a></p>
   <p class="pair"><b>숫자로 보면</b> · 오류가 이어지던 9월 1일 '일부 실천' 다음 기록일인 9월 2일, 나는 다시 '실천했다'로 돌아왔다. 13주 기록에서 이렇게 흔들린 다음 날 돌아온 것은 <b>11번 중 7번</b>이다. <small>(출처: 리추얼 기록 · 마무리 '강점 행동')</small></p>
-  <p>짜증 나는 일이 있는 날에도 8월 24일부터 아침마다 "기분이 태도가 되지 말자"라고 적었고, 9월 7일에는 "시간이 지나면 다시 기분이 회복된다"고 썼다. <span class="ab">자기조절력</span> 9월에는 4인 팀에서 서버 감시 시스템과 점검 스크립트를 맡았고, 10월 방어전 실습에서는 코드와 브라우저 저장소에 남아 있던 비밀키를 지웠다. 매일 남긴 기록에서 '실천했다'의 비율은 앞쪽 절반 68%에서 뒤쪽 절반 81%로 올랐다.</p>
+  <p>짜증 나는 일이 있는 날에도 8월 24일부터 아침마다 "기분이 태도가 되지 말자"라고 적었고, 9월 7일에는 "시간이 지나면 다시 기분이 회복된다"고 썼다. <a class="ab" href="#ab-regulation">자기조절력</a> 9월에는 4인 팀에서 서버 감시 시스템과 점검 스크립트를 맡았고, 10월 방어전 실습에서는 코드와 브라우저 저장소에 남아 있던 비밀키를 지웠다. 매일 남긴 기록에서 '실천했다'의 비율은 앞쪽 절반 68%에서 뒤쪽 절반 81%로 올랐다.</p>
   <!-- 직접 쓸 자리: 마지막 문장 -->
   <p>나는 원래 말을 잘하는 사람이 아니다. 다만 넘어질 때마다 먼저 그리고, 적고, 묻는 법을 익혔다. 이제는 화면 아래를 흐르는 데이터가 제 길을 가도록 지키는 엔지니어가 되려 한다.</p>
   </article>
@@ -242,18 +280,18 @@ body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
   <h2>이야기 속 세 가지 능력</h2>
   <p class="lead">아래 문장은 기록에서 뽑은 후보 가운데 제가 직접 고른 것만 실었습니다. 각 문장에 날짜와 근거가 있습니다.</p>
 <!-- renew:abilities:start -->
-<div class="ability"><h3>자기조절력</h3><ul>
+<div class="ability" id="ab-regulation"><h3>자기조절력</h3><ul>
 <li><time datetime="2026-08-21">2026-08-21</time> 8월 21일, 길을 걸으면서 너무 싫은 행동을 하는 사람을 봐서 짜증났지만 그래도 좋은 것을 생각하면서 걸었다. 그날 적은 깨달음: &quot;순간 짜증이 나지만 짜증 내지 않고 좋은 기분으로 바꿀 수 있게 했다&quot;<small>근거: 리추얼 기록 2026-08-21 아침 · 강점이 드러난 일화</small></li>
 <li><time datetime="2026-09-07">2026-09-07</time> 9월 7일, 아무리 짜증나는 일이 있어도 시간이 지나면 다시 기분이 회복된다. 그날 적은 깨달음: &quot;기분이 태도가 되지않게 주의&quot;<small>근거: 리추얼 기록 2026-09-07 아침 · 강점이 드러난 일화</small></li>
 <li><time datetime="2026-10-07">2026-10-07</time> 10월 7일, 동료가 내 장점으로 &quot;항상 긍정적인 태도로 생활하는 모습이 보기 좋습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-10-07 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
 </ul></div>
-<div class="ability"><h3>대인관계력</h3><ul>
+<div class="ability" id="ab-relation"><h3>대인관계력</h3><ul>
 <li><time datetime="2026-08-11">2026-08-11</time> 8월 11일, 동료가 내 장점으로 &quot;자칫하면 멀어질수있는 중간에서 방향을 잡아주었습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-11 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
 <li><time datetime="2026-08-20">2026-08-20</time> 8월 20일, 동료가 내 장점으로 &quot;팀장으로서 책임감을 가지고 팀을 이끌어 나가는 모습이 좋았습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-20 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
 <li><time datetime="2026-08-27">2026-08-27</time> 8월 27일, 동료가 내 장점으로 &quot;서로 기상 여부와 안부를 챙기는 모습에서 배려심이 느껴졌습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-27 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
 <li><time datetime="2026-09-04">2026-09-04</time> 9월 4일, 강의 중 놓친 부분이 있으면 적극적으로 물어봤다. 그날 적은 깨달음: &quot;내가 먼저 나서지 않으면 아무일이 일어나지않는다&quot;<small>근거: 리추얼 기록 2026-09-04 아침 · 강점이 드러난 일화</small></li>
 </ul></div>
-<div class="ability"><h3>자기동기력</h3><ul>
+<div class="ability" id="ab-motivation"><h3>자기동기력</h3><ul>
 <li><time datetime="2026-09-02">2026-09-02</time> 9월 2일, 오류로 수업을 놓쳤지만 그래도 따라가려고 노력했다. 그날 적은 깨달음: &quot;끝까지 포기하지 않고 따라가려함&quot;<small>근거: 리추얼 기록 2026-09-02 아침 · 강점이 드러난 일화</small></li>
 <li><time datetime="2026-10-01">2026-10-01</time> 10월 1일, 동료가 내 장점으로 &quot;강의 시간이 끝나더라도 추가적으로 학습하는 모습이 대단하다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-10-01 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
 <li><time datetime="2026-10-08">2026-10-08</time> 10월 8일, 건강한 삶을 위해 아침식사를 하려고 일찍 일어나서 준비했다. 그날 적은 깨달음: &quot;건강한 삶을 살자&quot;<small>근거: 리추얼 기록 2026-10-08 아침 · 강점이 드러난 일화</small></li>
@@ -267,8 +305,8 @@ body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
   <p class="lead">회복탄력성과 과제지속력을 말 대신 숫자로 보여 드립니다. 작은 숫자도 부풀리지 않고 그대로 적었습니다.</p>
   <ul class="nums">
 <!-- renew:numbers:start -->
-<li class="num key" data-id="ritual-days"><b>45일</b><span>아침·마무리 리추얼을 남긴 날</span><small>아침 45 · 마무리 44 (2026.08.11–10.21)</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
-<li class="num key" data-id="bounce-back"><b>7번 / 11번</b><span>&#x27;일부 실천&#x27; 다음 기록일에 &#x27;실천&#x27;으로 돌아온 횟수</span><small>흔들린 다음 날 다시 돌아온 비율</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<li class="num key" data-id="ritual-days"><b>45일</b><span>아침·마무리 리추얼을 남긴 날</span><small>아침 45 · 마무리 44 (2026.08.11–10.21)</small><span class="cal" role="img" aria-label="13주 기록 달력: 실천했다 33일, 일부 실천 11일"><i class="c-pre"></i><i class="c-done" title="2026-08-11 · 실천했다"></i><i class="c-part" title="2026-08-12 · 일부 실천"></i><i class="c-part" title="2026-08-13 · 일부 실천"></i><i class="c-part" title="2026-08-14 · 일부 실천"></i><i class="c-miss" title="2026-08-17 · 기록 없음"></i><i class="c-done" title="2026-08-18 · 실천했다"></i><i class="c-done" title="2026-08-19 · 실천했다"></i><i class="c-part" title="2026-08-20 · 일부 실천"></i><i class="c-done" title="2026-08-21 · 실천했다"></i><i class="c-done" title="2026-08-24 · 실천했다"></i><i class="c-done" title="2026-08-25 · 실천했다"></i><i class="c-done" title="2026-08-26 · 실천했다"></i><i class="c-done" title="2026-08-27 · 실천했다"></i><i class="c-done" title="2026-08-28 · 실천했다"></i><i class="c-done" title="2026-08-31 · 실천했다"></i><i class="c-part" title="2026-09-01 · 일부 실천"></i><i class="c-done" title="2026-09-02 · 실천했다"></i><i class="c-part" title="2026-09-03 · 일부 실천"></i><i class="c-part" title="2026-09-04 · 일부 실천"></i><i class="c-done" title="2026-09-07 · 실천했다"></i><i class="c-done" title="2026-09-08 · 실천했다"></i><i class="c-done" title="2026-09-09 · 실천했다"></i><i class="c-done" title="2026-09-10 · 실천했다"></i><i class="c-part" title="2026-09-11 · 일부 실천"></i><i class="c-part" title="2026-09-14 · 일부 실천"></i><i class="c-done" title="2026-09-15 · 실천했다"></i><i class="c-part" title="2026-09-16 · 일부 실천"></i><i class="c-done" title="2026-09-17 · 실천했다"></i><i class="c-done" title="2026-09-18 · 실천했다"></i><i class="c-done" title="2026-09-21 · 실천했다"></i><i class="c-miss" title="2026-09-22 · 기록 없음"></i><i class="c-miss" title="2026-09-23 · 기록 없음"></i><i class="c-miss" title="2026-09-24 · 기록 없음"></i><i class="c-miss" title="2026-09-25 · 기록 없음"></i><i class="c-done" title="2026-09-28 · 실천했다"></i><i class="c-done" title="2026-09-29 · 실천했다"></i><i class="c-done" title="2026-09-30 · 실천했다"></i><i class="c-done" title="2026-10-01 · 실천했다"></i><i class="c-done" title="2026-10-02 · 실천했다"></i><i class="c-miss" title="2026-10-05 · 기록 없음"></i><i class="c-done" title="2026-10-06 · 실천했다"></i><i class="c-done" title="2026-10-07 · 실천했다"></i><i class="c-part" title="2026-10-08 · 일부 실천"></i><i class="c-miss" title="2026-10-09 · 기록 없음"></i><i class="c-done" title="2026-10-12 · 실천했다"></i><i class="c-done" title="2026-10-13 · 실천했다"></i><i class="c-done" title="2026-10-14 · 실천했다"></i><i class="c-done" title="2026-10-15 · 실천했다"></i><i class="c-done" title="2026-10-16 · 실천했다"></i><i class="c-done" title="2026-10-19 · 실천했다"></i><i class="c-done" title="2026-10-20 · 실천했다"></i><i class="c-open" title="2026-10-21 · 아침 기록만"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i><i class="c-future"></i></span><span class="cal-key" aria-hidden="true"><span><i class="c-done"></i>실천했다</span><span><i class="c-part"></i>일부 실천</span><span><i class="c-miss"></i>기록 없음</span></span><em>과제지속력 · 출처: 리추얼 기록</em></li>
+<li class="num key" data-id="bounce-back"><b>7번 / 11번</b><span>&#x27;일부 실천&#x27; 다음 기록일에 &#x27;실천&#x27;으로 돌아온 횟수</span><small>흔들린 다음 날 다시 돌아온 비율</small><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i></span><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
 <li class="num key" data-id="half-compare"><b>68% → 81%</b><span>&#x27;실천했다&#x27; 비율, 앞쪽 절반 → 뒤쪽 절반</span><small>앞 22일 / 뒤 22일</small><span class="bars" aria-hidden="true"><i style="--v:68%"></i><i style="--v:81%"></i></span><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
 <li class="num" data-id="ritual-weeks"><b>11주 / 지난 11주</b><span>기록이 있는 주</span><small>13주 과정 중 11주차까지</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
 <li class="num" data-id="strength-done"><b>33일 / 44일</b><span>그날 지킬 강점을 &#x27;실천했다&#x27;고 적은 날</span><small>일부 실천 11일</small><em>과제지속력 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
@@ -316,5 +354,40 @@ body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
   <p><b>연락</b> · <a href="mailto:imtongho@naver.com">imtongho@naver.com</a></p>
   <p>숫자 칸과 능력 문단은 새 기록을 넣고 한 번 돌리면 다시 만들어지는 작은 장치(renew.py)로 갱신합니다.</p>
 </div></footer>
+<script>
+// 헤더에 지금 보는 섹션 표시 + 이야기 경로선을 읽은 만큼 채우기 (스크립트가 없어도 내용은 그대로 보임)
+(function () {
+  var links = {};
+  document.querySelectorAll('header.top nav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  var owner = { story: 'story', abilities: 'story', numbers: 'numbers', works: 'works', resume: 'resume' };
+  var sections = Object.keys(owner).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var tl = document.querySelector('.timeline');
+  var heads = tl ? Array.prototype.slice.call(tl.querySelectorAll('.entry h3')) : [];
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var mark = window.innerHeight * 0.45, current = null;
+    sections.forEach(function (sec) { if (sec.getBoundingClientRect().top <= mark) current = owner[sec.id]; });
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = 'resume';
+    Object.keys(links).forEach(function (id) {
+      if (id === current) links[id].setAttribute('aria-current', 'location'); else links[id].removeAttribute('aria-current');
+    });
+    if (!heads.length) return;
+    var box = tl.getBoundingClientRect(), dot = 14;
+    var y0 = heads[0].getBoundingClientRect().top - box.top + dot;
+    var yN = heads[heads.length - 1].getBoundingClientRect().top - box.top + dot;
+    var fill = Math.max(0, Math.min(yN - y0, window.innerHeight * 0.6 - box.top - y0));
+    tl.style.setProperty('--t0', y0 + 'px');
+    tl.style.setProperty('--fill', fill + 'px');
+    heads.forEach(function (h) {
+      h.parentNode.classList.toggle('passed', h.getBoundingClientRect().top + dot <= window.innerHeight * 0.6);
+    });
+  }
+  function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  update();
+})();
+</script>
 </body>
 </html>
