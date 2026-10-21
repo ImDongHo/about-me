@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>임동호 · 자기소개</title>
+<meta name="description" content="내비게이션 개발자에서 네트워크·보안 엔지니어로. 막히면 숨던 사람이 먼저 그리고 적고 묻게 된 이야기와 13주 기록.">
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --text:#1f2328; --sub:#5b6270; --line:#e4e2dc;
+  --accent:#2f6f5e; --accent-soft:#e3efe9; --warn:#a15c00; --warn-soft:#fff3df;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#15171a; --card:#1d2024; --text:#e9e7e2; --sub:#a4aab4; --line:#2e3238;
+         --accent:#7cc4ad; --accent-soft:#1f3530; --warn:#f0b35a; --warn-soft:#3a2d18; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
+header.top .wrap{display:flex;gap:16px;align-items:center;height:52px;overflow-x:auto;white-space:nowrap}
+header.top b{margin-right:auto}
+header.top a{text-decoration:none;color:var(--sub);font-size:15px}
+.hero{padding:72px 0 40px}
+.hero h1{font-size:44px;line-height:1.2;margin:0 0 16px;letter-spacing:-.02em}
+.hero .one{font-size:22px;line-height:1.55;margin:0 0 28px;font-weight:600}
+.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0;padding:0;list-style:none}
+.doors a{display:block;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  text-decoration:none;color:var(--text);font-weight:600}
+.doors small{display:block;color:var(--sub);font-weight:400;font-size:13px}
+section{padding:48px 0;border-top:1px solid var(--line)}
+h2{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
+.lead{color:var(--sub);margin:0 0 28px}
+.story h3{font-size:19px;margin:36px 0 8px}
+.story h3 time{color:var(--accent);font-weight:700;margin-right:6px}
+.story p{margin:0 0 14px;font-size:17px}
+.ab{display:inline-block;font-size:12px;line-height:1.6;padding:0 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;vertical-align:1px;white-space:nowrap}
+.pair{background:var(--accent-soft);border-radius:12px;padding:14px 16px;margin:18px 0;font-size:15px}
+.ability{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
+.ability h3{margin:0 0 8px;font-size:18px}
+.ability ul{margin:0;padding-left:18px}
+.ability li{margin:0 0 10px}
+.ability time{font-weight:700;color:var(--accent);margin-right:4px}
+.ability small,.num small,.num em{display:block;color:var(--sub);font-size:13px;font-style:normal}
+.nums{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.num{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.num b{display:block;font-size:26px;line-height:1.3}
+.num span{display:block;font-weight:600;margin:2px 0 4px}
+.works{display:grid;gap:14px}
+.work{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.work h3{margin:0 0 6px}
+.work .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-bottom:8px}
+.work.empty{border-style:dashed;background:transparent}
+.work.empty .tag{background:var(--warn-soft);color:var(--warn)}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--card);text-decoration:none;font-weight:600;margin:4px 8px 4px 0}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+footer{padding:40px 0 64px;color:var(--sub);font-size:14px;border-top:1px solid var(--line)}
+@media (max-width:640px){
+  .hero{padding:48px 0 28px}
+  .hero h1{font-size:34px}
+  .hero .one{font-size:19px}
+  .doors{grid-template-columns:repeat(2,1fr)}
+  .nums{grid-template-columns:1fr}
+  header.top .wrap{padding:0 16px}
+  .wrap{padding:0 16px}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <b>임동호</b>
+  <a href="#story">이야기</a><a href="#numbers">숫자</a><a href="#works">대표작</a><a href="#resume">이력서</a>
+</div></header>
+
+<main class="wrap">
+
+<!-- 첫 화면: 이름 · 한 줄 소개 · 입구 -->
+<div class="hero" id="top">
+  <h1>임동호</h1>
+  <!-- 직접 쓸 자리: 한 줄 소개 ("…한 사람"으로 끝나게) -->
+  <p class="one">2022년 가을 텅 빈 지도 앞에서 "혼자 고치지 않는다"고 적은 뒤로, 막히면 먼저 그리고 적고 묻는 사람</p>
+  <ul class="doors">
+    <li><a href="#story">이야기<small>3분이면 읽어요</small></a></li>
+    <li><a href="#numbers">숫자<small>13주 기록</small></a></li>
+    <li><a href="#works">대표작<small>논문 · 앱</small></a></li>
+    <li><a href="#resume">이력서<small>문서 받기</small></a></li>
+  </ul>
+</div>
+
+<!-- 본편: 내 이야기 -->
+<section id="story" class="story">
+  <h2>내 이야기</h2>
+  <p class="lead">11번 소설로 썼던 이야기에서 지어낸 장면과 대사를 덜어 내고, 날짜와 경력처럼 사실인 것만 남겨 다시 썼습니다.</p>
+
+  <h3><time datetime="2022">2022년 가을</time>지도가 사라진 오후</h3>
+  <!-- 직접 쓸 자리: 첫 문장 -->
+  <p>2022년 가을, 고객사에 새 버전을 넘기기 두 주 전, 내가 고친 내비게이션 화면에서 지도 위 정보가 통째로 사라졌다.</p>
+  <p>긴급 회의에서 상황을 설명해 달라는 말에 나는 문장을 끝맺지 못했다. 겨우 나온 말은 "아직 모릅니다" 한마디였다. 2015년 대학 첫 학기, 돌아가지 않는 코드를 출력만 맞춰 냈다가 조별 발표에서 들통났던 날과 다르지 않았다. 나는 막히면 혼자 끌어안고 겉만 고치는 사람이었다. 그날도 혼자 남아 밤새 고쳐 두고, 아무 일 없었던 것처럼 넘어가고 싶었다.</p>
+
+  <h3><time datetime="2022">같은 날 오후</time>혼자 고치지 않기로 했다</h3>
+  <p>그 대신 공책을 펴고 적었다. "혼자 고치지 않는다. 아는 것과 모르는 것을 나눠서 말한다." 숨고 싶은 마음을 그 두 문장으로 붙잡았다. <span class="ab">자기조절력</span></p>
+  <p>사수에게 가서 아는 것 세 가지와 모르는 것 하나를 말했고, 팀 메신저 방을 열어 확인한 것과 확인할 것을 올렸다. QA와 지도 엔진 담당이 그 방에 들어왔다. 함께 로그를 따라간 끝에, 두 상태를 같이 봐야 할 조건문이 하나만 보고 있다는 걸 찾았다. 다음 날 아침 긴급 패치가 나갔다. 나는 이 실수를 사례로 넣어 화면 수정 가이드를 썼고, 2023년 봄에 들어온 신입은 그 가이드로 첫 단독 업무를 마쳤다. 그해 나는 대리가 되었다. <span class="ab">대인관계력</span></p>
+  <p>습관은 한 번에 굳지 않았다. 2024년 5월, 3년 2개월 다닌 회사를 나온 뒤 나는 다시 말을 닫았다. 2024년 겨울, 공책에 '지금의 나'를 그리고 웹 개발 과정에 들어가 서버와 데이터베이스를 배웠고, 2025년 6월 정보처리기사와 SQLD에 합격했다. <span class="ab">자기동기력</span> 2025년 7월 오픈소스 개발자대회 '알리온' 통합 회의에서는 원인을 알면서도 정리 없이 말해 회의를 맴돌게 했다. 다음 날 나는 A4 한 장에 현상·원인·제안과 내 몫의 잘못을 적어 갔고, 다섯 명의 회의는 그 종이로 금방 정리되었다.</p>
+
+  <h3><time datetime="2026-09-04">2026.09.04</time>먼저 묻는 사람</h3>
+  <p>지금 나는 K-뉴딜 SKT ALEPH 과정에서 네트워크와 보안을 배운다. 9월 첫 주에는 실습 환경 오류로 사흘 동안 수업을 따라가지 못했다. 9월 4일 아침 기록에 이렇게 적었다. "내가 먼저 나서지 않으면 아무 일도 일어나지 않는다." 그날부터 놓친 부분은 바로 물었다. <span class="ab">자기동기력</span></p>
+  <p class="pair"><b>숫자로 보면</b> · 오류가 이어지던 9월 1일 '일부 실천' 다음 기록일인 9월 2일, 나는 다시 '실천했다'로 돌아왔다. 13주 기록에서 이렇게 흔들린 다음 날 돌아온 것은 <b>11번 중 7번</b>이다. <small>(출처: 리추얼 기록 · 마무리 '강점 행동')</small></p>
+  <p>9월에는 4인 팀에서 서버 감시 시스템과 점검 스크립트를 맡았고, 10월 방어전 실습에서는 코드와 브라우저 저장소에 남아 있던 비밀키를 지웠다. 매일 아침과 저녁 남긴 기록에서 '실천했다'의 비율은 앞쪽 절반 68%에서 뒤쪽 절반 81%로 올랐다.</p>
+  <!-- 직접 쓸 자리: 마지막 문장 -->
+  <p>나는 원래 말을 잘하는 사람이 아니다. 다만 넘어질 때마다 먼저 그리고, 적고, 묻는 법을 익혔다. 이제는 화면 아래를 흐르는 데이터가 제 길을 가도록 지키는 엔지니어가 되려 한다.</p>
+</section>
+
+<!-- 세 능력: 장치가 승인된 후보만 넣는 자리 -->
+<section id="abilities">
+  <h2>이야기 속 세 가지 능력</h2>
+  <p class="lead">아래 문장은 기록에서 뽑은 후보 가운데 제가 직접 고른 것만 실었습니다. 각 문장에 날짜와 근거가 있습니다.</p>
+<!-- renew:abilities:start -->
+<div class="ability"><h3>자기조절력</h3><ul>
+<li><time datetime="2026-08-21">2026-08-21</time> 8월 21일, 길을 걸으면서 너무 싫은 행동을 하는 사람을 봐서 짜증났지만 그래도 좋은 것을 생각하면서 걸었다. 그날 적은 깨달음: &quot;순간 짜증이 나지만 짜증 내지 않고 좋은 기분으로 바꿀 수 있게 했다&quot;<small>근거: 리추얼 기록 2026-08-21 아침 · 강점이 드러난 일화</small></li>
+<li><time datetime="2026-09-07">2026-09-07</time> 9월 7일, 아무리 짜증나는 일이 있어도 시간이 지나면 다시 기분이 회복된다. 그날 적은 깨달음: &quot;기분이 태도가 되지않게 주의&quot;<small>근거: 리추얼 기록 2026-09-07 아침 · 강점이 드러난 일화</small></li>
+<li><time datetime="2026-10-07">2026-10-07</time> 10월 7일, 동료가 내 장점으로 &quot;항상 긍정적인 태도로 생활하는 모습이 보기 좋습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-10-07 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
+</ul></div>
+<div class="ability"><h3>대인관계력</h3><ul>
+<li><time datetime="2026-08-11">2026-08-11</time> 8월 11일, 동료가 내 장점으로 &quot;자칫하면 멀어질수있는 중간에서 방향을 잡아주었습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-11 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
+<li><time datetime="2026-08-20">2026-08-20</time> 8월 20일, 동료가 내 장점으로 &quot;팀장으로서 책임감을 가지고 팀을 이끌어 나가는 모습이 좋았습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-20 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
+<li><time datetime="2026-08-27">2026-08-27</time> 8월 27일, 동료가 내 장점으로 &quot;서로 기상 여부와 안부를 챙기는 모습에서 배려심이 느껴졌습니다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-08-27 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
+<li><time datetime="2026-09-04">2026-09-04</time> 9월 4일, 강의 중 놓친 부분이 있으면 적극적으로 물어봤다. 그날 적은 깨달음: &quot;내가 먼저 나서지 않으면 아무일이 일어나지않는다&quot;<small>근거: 리추얼 기록 2026-09-04 아침 · 강점이 드러난 일화</small></li>
+</ul></div>
+<div class="ability"><h3>자기동기력</h3><ul>
+<li><time datetime="2026-09-02">2026-09-02</time> 9월 2일, 오류로 수업을 놓쳤지만 그래도 따라가려고 노력했다. 그날 적은 깨달음: &quot;끝까지 포기하지 않고 따라가려함&quot;<small>근거: 리추얼 기록 2026-09-02 아침 · 강점이 드러난 일화</small></li>
+<li><time datetime="2026-10-01">2026-10-01</time> 10월 1일, 동료가 내 장점으로 &quot;강의 시간이 끝나더라도 추가적으로 학습하는 모습이 대단하다&quot;라고 말해 주었다.<small>근거: 리추얼 기록 2026-10-01 아침 · 동료가 말해 준 내 장점(이름 없음)</small></li>
+<li><time datetime="2026-10-08">2026-10-08</time> 10월 8일, 건강한 삶을 위해 아침식사를 하려고 일찍 일어나서 준비했다. 그날 적은 깨달음: &quot;건강한 삶을 살자&quot;<small>근거: 리추얼 기록 2026-10-08 아침 · 강점이 드러난 일화</small></li>
+</ul></div>
+<!-- renew:abilities:end -->
+</section>
+
+<!-- 숫자 칸: 장치가 다시 세는 자리 -->
+<section id="numbers">
+  <h2>13주 기록의 숫자</h2>
+  <p class="lead">회복탄력성과 과제지속력을 말 대신 숫자로 보여 드립니다. 작은 숫자도 부풀리지 않고 그대로 적었습니다.</p>
+  <ul class="nums">
+<!-- renew:numbers:start -->
+<li class="num" data-id="ritual-days"><b>45일</b><span>아침·마무리 리추얼을 남긴 날</span><small>아침 45 · 마무리 44 (2026.08.11–10.21)</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
+<li class="num" data-id="ritual-weeks"><b>11주 / 지난 11주</b><span>기록이 있는 주</span><small>13주 과정 중 11주차까지</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
+<li class="num" data-id="strength-done"><b>33일 / 44일</b><span>그날 지킬 강점을 &#x27;실천했다&#x27;고 적은 날</span><small>일부 실천 11일</small><em>과제지속력 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<li class="num" data-id="bounce-back"><b>7번 / 11번</b><span>&#x27;일부 실천&#x27; 다음 기록일에 &#x27;실천&#x27;으로 돌아온 횟수</span><small>흔들린 다음 날 다시 돌아온 비율</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<li class="num" data-id="best-streak"><b>10일 연속</b><span>&#x27;실천했다&#x27;가 이어진 가장 긴 기록</span><small>2026-10-07 까지</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<li class="num" data-id="half-compare"><b>68% → 81%</b><span>&#x27;실천했다&#x27; 비율, 앞쪽 절반 → 뒤쪽 절반</span><small>앞 22일 / 뒤 22일</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<!-- renew:numbers:end -->
+  </ul>
+  <p class="lead" style="margin-top:16px;font-size:14px">숫자 기준일: <!-- renew:asof:start -->
+<time datetime="2026-10-21">2026-10-21</time>
+<!-- renew:asof:end --> · 출처: 리추얼 기록, 내 출석 기록, 내 제출 현황</p>
+</section>
+
+<!-- 대표작 -->
+<section id="works">
+  <h2>대표작</h2>
+  <p class="lead">과정에서 만든 결과물 가운데 두 가지를 골랐습니다.</p>
+  <div class="works">
+    <article class="work">
+      <span class="tag">10번 과제 · 논문</span>
+      <h3>같은 화질에서 WebP·AVIF는 JPEG보다 얼마나 작은가</h3>
+      <p>사진 24장과 보안 실습 화면 캡처 24장을 같은 화질(SSIM 0.90·0.95·0.98)로 맞춰 432건을 비교했습니다. 사진에서는 WebP가 25~27%, AVIF가 36~38% 작았고, 화면 캡처에서는 WebP가 40~55%, AVIF가 72~81% 작았습니다. 다른 운영체제에서 다시 돌려도 같은 파일이 나오도록 원자료와 스크립트를 함께 남겼습니다.</p>
+      <p style="color:var(--sub);font-size:14px">2026년 10월 14일 · 11쪽</p>
+      <a class="btn" href="files/paper.pdf">논문 읽기 (PDF)</a>
+    </article>
+    <article class="work empty">
+      <span class="tag">13번 과제 · 앱 · 준비 중</span>
+      <h3>앱이 들어갈 자리</h3>
+      <p>13번 과제를 마친 뒤 이 자리에 앱 링크와 설명을 채웁니다. 예정일: <b>[YYYY-MM-DD]</b></p>
+    </article>
+  </div>
+</section>
+
+<!-- 이력서 -->
+<section id="resume">
+  <h2>이력서 · 자기소개서 · 경력기술서</h2>
+  <p class="lead">지원서에 바로 붙일 수 있는 문서입니다. 로그인 없이 받을 수 있습니다.</p>
+  <a class="btn" href="files/임동호_이력서_자기소개서_경력기술서.docx">문서 받기 (DOCX)</a>
+  <a class="btn ghost" href="files/임동호_이력서_자기소개서_경력기술서.pdf">PDF로 보기</a>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <p><b>연락</b> · <a href="mailto:imtongho@naver.com">imtongho@naver.com</a></p>
+  <p>숫자 칸과 능력 문단은 새 기록을 넣고 한 번 돌리면 다시 만들어지는 작은 장치(renew.py)로 갱신합니다.</p>
+</div></footer>
+</body>
+</html>
