@@ -224,6 +224,19 @@ a.ab:hover{background:var(--accent);color:var(--on-accent)}
 .num.key b{color:var(--accent)}
 .ability h3{border-bottom:3px solid var(--accent);display:inline-block;padding-right:6px}
 .work.paper{background:var(--surface);border:0}
+/* 배경 띠: 숫자·이력서 섹션만 화면 좌우 끝까지 (box-shadow로 늘려 가로 스크롤 없음) */
+:root{--band-numbers:#f3f6fb;--band-resume:#eaf1fd}
+@media (prefers-color-scheme: dark){:root{--band-numbers:#162030;--band-resume:#18243a}}
+#numbers,#resume{border-top:0;clip-path:inset(0 -100vmax)}
+#numbers{background:var(--band-numbers);box-shadow:0 0 0 100vmax var(--band-numbers)}
+#resume{background:var(--band-resume);box-shadow:0 0 0 100vmax var(--band-resume)}
+#numbers + section,footer{border-top:0}
+/* 숫자 띠 위에서 달력·막대·구분선이 묻히지 않게 */
+#numbers{--track:#dbe2ec;--line:#d6dee9;--cal-miss:#bcc5d1}
+@media (prefers-color-scheme: dark){#numbers{--track:#26303e;--line:#2a3442;--cal-miss:#2a3340}}
+/* 이력서 띠 위에서 보조 버튼을 바탕과 구분 */
+#resume .btn.ghost{background:var(--bg)}
+#resume .btn.ghost:hover{background:var(--surface)}
 @media (max-width:720px){.doors{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:0}.doors::before,.doors li::before{display:none}
  .doors a::after{content:"↓" / ""}
  .story .entry::before{left:3px}.story h3::before{left:-26px;top:5px}
