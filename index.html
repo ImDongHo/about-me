@@ -7,112 +7,209 @@
 <meta name="description" content="내비게이션 개발자에서 네트워크·보안 엔지니어로. 막히면 숨던 사람이 먼저 그리고 적고 묻게 된 이야기와 13주 기록.">
 <style>
 :root{
-  --bg:#f7f6f2; --card:#ffffff; --text:#1f2328; --sub:#5b6270; --line:#e4e2dc;
-  --accent:#2f6f5e; --accent-soft:#e3efe9; --warn:#a15c00; --warn-soft:#fff3df;
+  --bg:#f8f5ee; --surface:#fffdf8; --text:#25221d; --sub:#5f594e; --faint:#8a8376;
+  --line:#e4ddd0; --track:#ebe5d9;
+  --accent:#2d6a54; --accent-strong:#1f5141; --accent-soft:#e5eee7; --accent-mid:#9bbfae;
+  --dash:#cfc6b6; --on-accent:#fffdf8;
+  --measure:720px; --page:960px; --head:56px;
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#15171a; --card:#1d2024; --text:#e9e7e2; --sub:#a4aab4; --line:#2e3238;
-         --accent:#7cc4ad; --accent-soft:#1f3530; --warn:#f0b35a; --warn-soft:#3a2d18; }
+  :root{
+    --bg:#171613; --surface:#1f1d19; --text:#ece6da; --sub:#b0a899; --faint:#8d8678;
+    --line:#34302a; --track:#2c2924;
+    --accent:#8cc5ac; --accent-strong:#a9d6c1; --accent-soft:#1f2e27; --accent-mid:#4f7a67;
+    --dash:#4a453d; --on-accent:#13201a;
+  }
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-  line-height:1.75;word-break:keep-all;overflow-wrap:anywhere}
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:anywhere;
+  -webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
-.wrap{max-width:760px;margin:0 auto;padding:0 20px}
-header.top{position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);
-  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:5}
-header.top .wrap{display:flex;gap:16px;align-items:center;height:52px;overflow-x:auto;white-space:nowrap}
-header.top b{margin-right:auto}
-header.top a{text-decoration:none;color:var(--sub);font-size:15px}
-.hero{padding:72px 0 40px}
-.hero h1{font-size:44px;line-height:1.2;margin:0 0 16px;letter-spacing:-.02em}
-.hero .one{font-size:22px;line-height:1.55;margin:0 0 28px;font-weight:600}
-.doors{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0;padding:0;list-style:none}
-.doors a{display:block;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--card);
-  text-decoration:none;color:var(--text);font-weight:600}
-.doors small{display:block;color:var(--sub);font-weight:400;font-size:13px}
-section{padding:48px 0;border-top:1px solid var(--line)}
-h2{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
-.lead{color:var(--sub);margin:0 0 28px}
-.story h3{font-size:19px;margin:36px 0 8px}
-.story h3 time{color:var(--accent);font-weight:700;margin-right:6px}
-.story p{margin:0 0 14px;font-size:17px}
-.ab{display:inline-block;font-size:12px;line-height:1.6;padding:0 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600;vertical-align:1px;white-space:nowrap}
-.pair{background:var(--accent-soft);border-radius:12px;padding:14px 16px;margin:18px 0;font-size:15px}
-.ability{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:0 0 14px}
-.ability h3{margin:0 0 8px;font-size:18px}
-.ability ul{margin:0;padding-left:18px}
-.ability li{margin:0 0 10px}
-.ability time{font-weight:700;color:var(--accent);margin-right:4px}
-.ability small,.num small,.num em{display:block;color:var(--sub);font-size:13px;font-style:normal}
-.nums{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.num{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
-.num b{display:block;font-size:26px;line-height:1.3}
-.num span{display:block;font-weight:600;margin:2px 0 4px}
-.works{display:grid;gap:14px}
-.work{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
-.work h3{margin:0 0 6px}
-.work .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-bottom:8px}
-.work.empty{border-style:dashed;background:transparent}
-.work.empty .tag{background:var(--warn-soft);color:var(--warn)}
-.btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--card);text-decoration:none;font-weight:600;margin:4px 8px 4px 0}
-.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
-footer{padding:40px 0 64px;color:var(--sub);font-size:14px;border-top:1px solid var(--line)}
-@media (max-width:640px){
-  .hero{padding:48px 0 28px}
-  .hero h1{font-size:34px}
-  .hero .one{font-size:19px}
-  .doors{grid-template-columns:repeat(2,1fr)}
+a:hover{color:var(--accent-strong)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+[id]{scroll-margin-top:calc(var(--head) + 24px)}
+.wrap{max-width:calc(var(--page) + 48px);margin:0 auto;padding:0 24px}
+time,.num b{font-variant-numeric:tabular-nums}
+
+/* 1. 고정 헤더 */
+header.top{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:24px;height:var(--head)}
+header.top b{margin-right:auto;font-size:16px;letter-spacing:-.01em}
+header.top nav{display:flex;gap:22px}
+header.top nav a{text-decoration:none;color:var(--sub);font-size:15px;padding:6px 0}
+header.top nav a:hover{color:var(--text)}
+
+/* 2. 첫 화면 */
+.hero{padding:120px 0 104px}
+.hero h1{font-size:clamp(40px,6vw,56px);line-height:1.15;margin:0 0 28px;letter-spacing:-.025em;font-weight:700}
+.hero .one{font-size:clamp(20px,2.6vw,25px);line-height:1.6;font-weight:500;margin:0 0 56px;max-width:620px;letter-spacing:-.01em}
+.doors{display:flex;flex-wrap:wrap;gap:16px 44px;margin:0;padding:24px 0 0;list-style:none;border-top:1px solid var(--line);max-width:var(--measure)}
+.doors a{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:6px;
+  text-decoration:none;color:var(--text);font-weight:600;font-size:16px}
+.doors a::after{content:"↓" / "";order:1;color:var(--accent);font-weight:400}
+.doors a:hover{color:var(--accent)}
+.doors small{order:2;flex-basis:100%;color:var(--sub);font-weight:400;font-size:13px;margin-top:2px}
+
+/* 공통 섹션 */
+section{padding:96px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,3.2vw,32px);line-height:1.3;margin:0 0 12px;letter-spacing:-.02em}
+.lead{color:var(--sub);margin:0 0 48px;max-width:var(--measure);font-size:16px}
+
+/* 3. 내 이야기: 세로 타임라인 */
+.story .entry{position:relative;padding:0 0 40px 200px;max-width:calc(200px + var(--measure))}
+.story .entry::before{content:"";position:absolute;left:174px;top:.95em;bottom:-.95em;width:1px;background:var(--line)}
+.story .entry:last-of-type::before{display:none}
+.story h3{position:relative;font-size:20px;line-height:1.45;margin:0 0 14px;letter-spacing:-.01em}
+.story h3::before{content:"";position:absolute;left:-30px;top:.5em;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent)}
+.story h3 time{position:absolute;left:-200px;top:.2em;width:150px;text-align:right;
+  font-size:14px;font-weight:600;color:var(--accent);letter-spacing:0}
+.story p{margin:0 0 18px;font-size:17px;line-height:1.85}
+.ab{display:inline-block;font-size:12px;line-height:1.7;padding:0 8px;border-radius:99px;
+  background:var(--accent-soft);color:var(--accent-strong);font-weight:600;vertical-align:2px;white-space:nowrap;margin-left:2px}
+.story .pair{background:var(--accent-soft);border-radius:10px;padding:18px 22px;margin:24px 0;font-size:16px;line-height:1.8}
+.pair small{display:block;margin-top:6px;color:var(--sub);font-size:13px}
+
+/* 4. 세 가지 능력 */
+.ability{max-width:calc(140px + var(--measure));margin:0 0 56px}
+.ability:last-child{margin-bottom:0}
+.ability h3{font-size:20px;margin:0;padding:0 0 12px;border-bottom:1px solid var(--text);letter-spacing:-.01em}
+.ability ul{list-style:none;margin:0;padding:0}
+.ability li{display:grid;grid-template-columns:116px minmax(0,1fr);column-gap:24px;row-gap:6px;
+  padding:20px 0;border-bottom:1px solid var(--line);font-size:16.5px;line-height:1.8}
+.ability li time{grid-row:1 / span 2;font-size:14px;color:var(--faint);padding-top:.2em}
+.ability li small{grid-column:2;color:var(--sub);font-size:13px;line-height:1.6}
+
+/* 5. 숫자 */
+.nums{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:48px}
+.num{padding:28px 0;display:flex;flex-direction:column}
+.num:not(.key){border-top:1px solid var(--line)}
+.num.key{padding-top:0;padding-bottom:40px}
+.num b{font-size:26px;line-height:1.25;letter-spacing:-.02em;font-weight:700;margin-bottom:8px}
+.num.key b{font-size:clamp(34px,4.4vw,44px);color:var(--accent-strong);margin-bottom:10px}
+.num span{font-weight:600;font-size:15px;line-height:1.55}
+.num small{color:var(--sub);font-size:14px;margin-top:4px}
+.num em{color:var(--faint);font-size:12.5px;font-style:normal;margin-top:10px;line-height:1.6}
+.bars{display:grid;gap:6px;margin-top:14px;max-width:240px}
+.bars i{display:block;height:8px;border-radius:4px;background:var(--track);overflow:hidden}
+.bars i::before{content:"";display:block;height:100%;width:var(--v);background:var(--accent-mid);border-radius:4px}
+.bars i + i::before{background:var(--accent)}
+.note{color:var(--sub);font-size:14px;margin:28px 0 0;padding-top:20px;border-top:1px solid var(--line)}
+
+/* 6. 대표작 */
+.works{display:grid;gap:24px;max-width:calc(var(--measure) + 80px)}
+.work{border-radius:14px;padding:36px 40px}
+.work .tag{display:block;font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.02em;margin-bottom:12px}
+.work h3{margin:0 0 16px;line-height:1.4;letter-spacing:-.015em}
+.work p{margin:0 0 12px;line-height:1.85}
+.work.paper{background:var(--surface);border:1px solid var(--line)}
+.work.paper h3{font-size:clamp(22px,2.8vw,27px)}
+.work.paper p{font-size:16.5px}
+.work .meta{color:var(--sub);font-size:14px;margin:4px 0 28px}
+.work .actions{display:flex;justify-content:flex-end}
+.work.empty{border:1.5px dashed var(--dash);padding:24px 28px;color:var(--sub)}
+.work.empty .tag{color:var(--faint)}
+.work.empty h3{font-size:17px;color:var(--text);margin-bottom:6px}
+.work.empty p{font-size:15px;margin:0}
+.work.empty b{color:var(--text)}
+
+/* 7. 버튼 */
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;
+  background:var(--accent);color:var(--on-accent);text-decoration:none;font-weight:600;font-size:15.5px;border:1.5px solid var(--accent)}
+.btn:hover{background:var(--accent-strong);border-color:var(--accent-strong);color:var(--on-accent)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.ghost:hover{background:var(--accent-soft);color:var(--accent-strong)}
+
+/* 8. 푸터 */
+footer{border-top:1px solid var(--line);padding:40px 0 72px;color:var(--sub);font-size:14px}
+footer p{margin:0 0 6px;max-width:var(--measure)}
+footer b{color:var(--text)}
+
+/* 반응형 */
+@media (max-width:860px){
   .nums{grid-template-columns:1fr}
-  header.top .wrap{padding:0 16px}
+  .num.key{padding:24px 0;border-top:1px solid var(--line)}
+  .num.key:first-child{border-top:0;padding-top:0}
+}
+@media (max-width:720px){
   .wrap{padding:0 16px}
+  header.top .wrap{gap:12px}
+  header.top nav{gap:14px}
+  header.top nav a{font-size:14px}
+  .hero{padding:72px 0 64px}
+  .hero .one{margin-bottom:40px}
+  .doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}
+  section{padding:64px 0}
+  .lead{margin-bottom:36px}
+  .story .entry{padding:0 0 32px 24px}
+  .story .entry::before{left:4px;top:11px;bottom:-11px}
+  .story h3::before{left:-24px;top:7px}
+  .story h3 time{position:static;display:block;width:auto;text-align:left;font-size:13px;margin-bottom:2px}
+  .story p{font-size:16.5px}
+  .story .pair{padding:16px 18px}
+  .ability li{grid-template-columns:minmax(0,1fr);padding:18px 0;font-size:16px}
+  .ability li time{grid-row:auto;padding-top:0;font-size:13px}
+  .ability li small{grid-column:1}
+  .work{padding:24px 20px}
+  .work.empty{padding:20px}
+  .work .actions,.actions{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
 }
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <b>임동호</b>
-  <a href="#story">이야기</a><a href="#numbers">숫자</a><a href="#works">대표작</a><a href="#resume">이력서</a>
+  <nav aria-label="섹션 이동"><a href="#story">이야기</a><a href="#numbers">숫자</a><a href="#works">대표작</a><a href="#resume">이력서</a></nav>
 </div></header>
 
 <main class="wrap">
 
 <!-- 첫 화면: 이름 · 한 줄 소개 · 입구 -->
-<div class="hero" id="top">
+<header class="hero" id="top">
   <h1>임동호</h1>
   <!-- 직접 쓸 자리: 한 줄 소개 ("…한 사람"으로 끝나게) -->
   <p class="one">2015년 첫 학기 발표에서 겉만 맞춘 코드가 들통난 뒤로, 흐름부터 그리고 막히면 먼저 묻는 사람</p>
-  <ul class="doors">
+  <ul class="doors" aria-label="바로 가기">
     <li><a href="#story">이야기<small>3분이면 읽어요</small></a></li>
     <li><a href="#numbers">숫자<small>13주 기록</small></a></li>
     <li><a href="#works">대표작<small>논문 · 앱</small></a></li>
     <li><a href="#resume">이력서<small>문서 받기</small></a></li>
   </ul>
-</div>
+</header>
 
 <!-- 본편: 내 이야기 -->
 <section id="story" class="story">
   <h2>내 이야기</h2>
   <p class="lead">11번 소설로 썼던 이야기에서 지어낸 장면과 대사를 덜어 내고, 실제로 있었던 일과 날짜만 남겨 다시 썼습니다.</p>
 
+  <div class="timeline">
+  <article class="entry">
   <h3><time datetime="2015">2015년 1학기</time>들통난 발표</h3>
   <!-- 직접 쓸 자리: 첫 문장 -->
   <p>2015년 대학 첫 학기, 나는 돌아가지 않는 코드를 출력만 맞춰 조별 발표에 냈다가 그 자리에서 들통났다.</p>
   <p>막히면 묻지 않았다. 도와 달라고 말하는 순간 내가 모른다는 게 드러날 것 같았고, 설명하려 하면 말이 엉켰다. 그래서 혼자 붙들고 있다가 겉만 고쳐 두는 쪽을 택했다. 그 발표는 나 혼자의 실패로 끝나지 않고 조 전체의 결과가 되었다.</p>
-
+  </article>
+  <article class="entry">
   <h3><time datetime="2021">2021–2023</time>혼자 고치지 않는 법</h3>
   <p>2021년 4월, 나는 자동차 내비게이션을 만드는 회사에 들어갔다. 처음 보는 큰 코드 앞에서 첫 학기의 막막함이 다시 찾아왔다. 이번에는 모르는 것을 정리해서 물었고, 그렇게 익힌 화면 수정 순서를 가이드 문서로 남겼다. <span class="ab">대인관계력</span></p>
   <p>2023년 봄에 들어온 신입은 그 가이드로 첫 단독 업무를 마쳤다. 내가 혼자 끌어안던 것을 이제는 꺼내어 남에게 건넬 수 있게 된 것이다. 그해 나는 대리가 되었다.</p>
   <p>2024년 5월, 3년 2개월 다닌 회사를 나왔다. 화면 뒤의 서버와 데이터베이스가 궁금했다. 2025년 웹 개발 과정에서 서버를 직접 만들었고, 6월에 정보처리기사와 SQLD에 합격했다. 7월부터는 다섯 명이 함께한 오픈소스 개발자대회 '알리온'에서 즐겨찾기·메인 화면 알림·마이페이지를 맡아 9월에 제출했다. <span class="ab">자기동기력</span></p>
-
+  </article>
+  <article class="entry">
   <h3><time datetime="2026-09-04">2026.09.04</time>먼저 묻는 사람</h3>
   <p>지금 나는 K-뉴딜 SKT ALEPH 과정에서 네트워크와 보안을 배운다. 9월 첫 주에는 실습 환경 오류로 사흘 동안 수업을 따라가지 못했다. 예전 같으면 혼자 붙들었을 일이다. 9월 4일 아침 기록에 이렇게 적었다. "내가 먼저 나서지 않으면 아무 일도 일어나지 않는다." 그날부터 놓친 부분은 바로 물었다. <span class="ab">자기동기력</span></p>
   <p class="pair"><b>숫자로 보면</b> · 오류가 이어지던 9월 1일 '일부 실천' 다음 기록일인 9월 2일, 나는 다시 '실천했다'로 돌아왔다. 13주 기록에서 이렇게 흔들린 다음 날 돌아온 것은 <b>11번 중 7번</b>이다. <small>(출처: 리추얼 기록 · 마무리 '강점 행동')</small></p>
   <p>짜증 나는 일이 있는 날에도 8월 24일부터 아침마다 "기분이 태도가 되지 말자"라고 적었고, 9월 7일에는 "시간이 지나면 다시 기분이 회복된다"고 썼다. <span class="ab">자기조절력</span> 9월에는 4인 팀에서 서버 감시 시스템과 점검 스크립트를 맡았고, 10월 방어전 실습에서는 코드와 브라우저 저장소에 남아 있던 비밀키를 지웠다. 매일 남긴 기록에서 '실천했다'의 비율은 앞쪽 절반 68%에서 뒤쪽 절반 81%로 올랐다.</p>
   <!-- 직접 쓸 자리: 마지막 문장 -->
   <p>나는 원래 말을 잘하는 사람이 아니다. 다만 넘어질 때마다 먼저 그리고, 적고, 묻는 법을 익혔다. 이제는 화면 아래를 흐르는 데이터가 제 길을 가도록 지키는 엔지니어가 되려 한다.</p>
+  </article>
+  </div>
 </section>
 
 <!-- 세 능력: 장치가 승인된 후보만 넣는 자리 -->
@@ -145,15 +242,15 @@ footer{padding:40px 0 64px;color:var(--sub);font-size:14px;border-top:1px solid 
   <p class="lead">회복탄력성과 과제지속력을 말 대신 숫자로 보여 드립니다. 작은 숫자도 부풀리지 않고 그대로 적었습니다.</p>
   <ul class="nums">
 <!-- renew:numbers:start -->
-<li class="num" data-id="ritual-days"><b>45일</b><span>아침·마무리 리추얼을 남긴 날</span><small>아침 45 · 마무리 44 (2026.08.11–10.21)</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
+<li class="num key" data-id="ritual-days"><b>45일</b><span>아침·마무리 리추얼을 남긴 날</span><small>아침 45 · 마무리 44 (2026.08.11–10.21)</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
+<li class="num key" data-id="bounce-back"><b>7번 / 11번</b><span>&#x27;일부 실천&#x27; 다음 기록일에 &#x27;실천&#x27;으로 돌아온 횟수</span><small>흔들린 다음 날 다시 돌아온 비율</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
+<li class="num key" data-id="half-compare"><b>68% → 81%</b><span>&#x27;실천했다&#x27; 비율, 앞쪽 절반 → 뒤쪽 절반</span><small>앞 22일 / 뒤 22일</small><span class="bars" aria-hidden="true"><i style="--v:68%"></i><i style="--v:81%"></i></span><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
 <li class="num" data-id="ritual-weeks"><b>11주 / 지난 11주</b><span>기록이 있는 주</span><small>13주 과정 중 11주차까지</small><em>과제지속력 · 출처: 리추얼 기록</em></li>
 <li class="num" data-id="strength-done"><b>33일 / 44일</b><span>그날 지킬 강점을 &#x27;실천했다&#x27;고 적은 날</span><small>일부 실천 11일</small><em>과제지속력 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
-<li class="num" data-id="bounce-back"><b>7번 / 11번</b><span>&#x27;일부 실천&#x27; 다음 기록일에 &#x27;실천&#x27;으로 돌아온 횟수</span><small>흔들린 다음 날 다시 돌아온 비율</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
 <li class="num" data-id="best-streak"><b>10일 연속</b><span>&#x27;실천했다&#x27;가 이어진 가장 긴 기록</span><small>2026-10-07 까지</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
-<li class="num" data-id="half-compare"><b>68% → 81%</b><span>&#x27;실천했다&#x27; 비율, 앞쪽 절반 → 뒤쪽 절반</span><small>앞 22일 / 뒤 22일</small><em>회복탄력성 · 출처: 리추얼 기록 · 마무리 &#x27;강점 행동&#x27;</em></li>
 <!-- renew:numbers:end -->
   </ul>
-  <p class="lead" style="margin-top:16px;font-size:14px">숫자 기준일: <!-- renew:asof:start -->
+  <p class="note">숫자 기준일: <!-- renew:asof:start -->
 <time datetime="2026-10-21">2026-10-21</time>
 <!-- renew:asof:end --> · 출처: 리추얼 기록, 내 출석 기록, 내 제출 현황</p>
 </section>
@@ -163,12 +260,12 @@ footer{padding:40px 0 64px;color:var(--sub);font-size:14px;border-top:1px solid 
   <h2>대표작</h2>
   <p class="lead">과정에서 만든 결과물 가운데 두 가지를 골랐습니다.</p>
   <div class="works">
-    <article class="work">
+    <article class="work paper">
       <span class="tag">10번 과제 · 논문</span>
       <h3>같은 화질에서 WebP·AVIF는 JPEG보다 얼마나 작은가</h3>
       <p>사진 24장과 보안 실습 화면 캡처 24장을 같은 화질(SSIM 0.90·0.95·0.98)로 맞춰 432건을 비교했습니다. 사진에서는 WebP가 25~27%, AVIF가 36~38% 작았고, 화면 캡처에서는 WebP가 40~55%, AVIF가 72~81% 작았습니다. 다른 운영체제에서 다시 돌려도 같은 파일이 나오도록 원자료와 스크립트를 함께 남겼습니다.</p>
-      <p style="color:var(--sub);font-size:14px">2026년 10월 14일 · 11쪽</p>
-      <a class="btn" href="files/paper.pdf">논문 읽기 (PDF)</a>
+      <p class="meta">2026년 10월 14일 · 11쪽</p>
+      <div class="actions"><a class="btn" href="files/paper.pdf">논문 읽기 (PDF)</a></div>
     </article>
     <article class="work empty">
       <span class="tag">13번 과제 · 앱 · 준비 중</span>
@@ -182,8 +279,10 @@ footer{padding:40px 0 64px;color:var(--sub);font-size:14px;border-top:1px solid 
 <section id="resume">
   <h2>이력서 · 자기소개서 · 경력기술서</h2>
   <p class="lead">지원서에 바로 붙일 수 있는 문서입니다. 로그인 없이 받을 수 있습니다.</p>
-  <a class="btn" href="files/임동호_이력서_자기소개서_경력기술서.docx">문서 받기 (DOCX)</a>
-  <a class="btn ghost" href="files/임동호_이력서_자기소개서_경력기술서.pdf">PDF로 보기</a>
+  <div class="actions">
+    <a class="btn" href="files/임동호_이력서_자기소개서_경력기술서.docx" download>문서 받기 (DOCX)</a>
+    <a class="btn ghost" href="files/임동호_이력서_자기소개서_경력기술서.pdf">PDF로 보기</a>
+  </div>
 </section>
 
 </main>
