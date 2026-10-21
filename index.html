@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>임동호 · 자기소개</title>
 <meta name="description" content="내비게이션 개발자에서 네트워크·보안 엔지니어로. 막히면 숨던 사람이 먼저 그리고 적고 묻게 된 이야기와 13주 기록.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f8f5ee; --surface:#fffdf8; --text:#25221d; --sub:#5f594e; --faint:#8a8376;
@@ -160,6 +162,29 @@ footer b{color:var(--text)}
   .work .actions,.actions{flex-direction:column;align-items:stretch}
   .btn{width:100%}
 }
+
+/* 길 안내: 내비게이션 경로처럼 이어지는 색과 선 */
+:root{--bg:#ffffff;--surface:#f3f6fa;--text:#1d232b;--sub:#56606d;--faint:#7d8693;--line:#e2e7ee;--track:#e6ebf2;
+ --accent:#1f5fd6;--accent-strong:#16469f;--accent-soft:#eaf1fd;--accent-mid:#a7c1f1;--dash:#c7d2e2;--on-accent:#ffffff}
+@media (prefers-color-scheme: dark){:root{--bg:#111418;--surface:#181d24;--text:#e7ebf0;--sub:#a3acb8;--faint:#7c8591;--line:#262d36;--track:#232a33;
+ --accent:#6f9ef0;--accent-strong:#a2c0f6;--accent-soft:#17243a;--accent-mid:#2f4c7d;--dash:#34404f;--on-accent:#0d1420}}
+body{font-family:"IBM Plex Sans KR","Pretendard",sans-serif}
+.hero h1{font-weight:700;letter-spacing:-.03em}
+.doors{border-top:0;position:relative;padding-top:34px;gap:16px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.doors::before{content:"";position:absolute;left:5px;right:12%;top:9px;height:3px;border-radius:2px;background:var(--accent)}
+.doors li{position:relative}
+.doors li::before{content:"";position:absolute;left:0;top:-30px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.doors a::after{content:""}
+.story .entry::before{left:172px;width:4px;border-radius:2px;background:var(--accent-mid)}
+.story h3::before{left:-34px;top:.38em;width:14px;height:14px;border:3px solid var(--accent);background:var(--bg)}
+.story h3 time{color:var(--text);font-weight:700}
+.story .pair{background:var(--accent-soft);border-radius:12px}
+.num.key b{color:var(--accent)}
+.ability h3{border-bottom:3px solid var(--accent);display:inline-block;padding-right:6px}
+.work.paper{background:var(--surface);border:0}
+@media (max-width:720px){.doors{grid-template-columns:repeat(2,minmax(0,1fr));padding-top:0}.doors::before,.doors li::before{display:none}
+ .doors a::after{content:"↓" / ""}
+ .story .entry::before{left:3px}.story h3::before{left:-26px;top:5px}}
 </style>
 </head>
 <body>
